@@ -1,3 +1,26 @@
+# GitHub Copilot Coding Agent — How It Works
+
+When you ask the GitHub Copilot Coding Agent to make changes, it **never commits directly to your `main` branch**. Here is exactly what happens every time:
+
+1. **A new branch is created automatically** — the agent always works on a dedicated branch with a name like `copilot/<short-description>` (for example, `copilot/add-info-on-branch-usage`).
+2. **All code changes go to that branch** — your `main` branch is untouched.
+3. **A Pull Request (PR) is opened** — the agent opens a PR from its branch targeting `main`. You can review every change line-by-line in the PR before anything is merged.
+4. **You decide what gets merged** — only after you approve and merge the PR will any change reach `main`. You can also close the PR without merging if you don't like the result.
+
+### Protecting `main` with branch protection rules (recommended)
+
+For extra safety you can configure GitHub branch protection rules so that no one (not even repository admins) can push directly to `main`:
+
+1. Go to your repository on GitHub → **Settings** → **Branches**.
+2. Click **Add branch ruleset** (or **Add rule** for the classic interface).
+3. Set the branch name pattern to `main`.
+4. Enable **Require a pull request before merging** and optionally **Require approvals**.
+5. Click **Save changes**.
+
+With these rules in place, merging a PR is the *only* way code can reach `main`.
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
